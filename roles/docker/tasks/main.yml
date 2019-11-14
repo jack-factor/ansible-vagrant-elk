@@ -1,0 +1,53 @@
+---
+
+- name: uninstall old versions.
+  package:
+    name:
+      - docker
+      - docker-common
+    state: absent
+
+- name: install package
+  yum:
+    name: [ "yum-utils", "device-mapper-persistent-data", "lvm2"]
+    state: "installed"
+
+- name: add gpg key
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: add repository
+  get_url:
+    url: "https://download.docker.com/linux/centos/docker-ce.repo"
+    dest: '/etc/yum.repos.d/docker-ce.repo'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: install docker
+  yum:
+    name: ["docker-ce", "docker-ce-cli", "containerd.io"]
+    state: "present"
+  notify: restart docker
+
+- name: start and enable
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: install pip
+  yum:
+    name: python-pip
+    state: installed
+
+- name: install docker sdk
+  pip:
+    name: docker
+    state: present
+
+- name: Pull default Docker image
+  docker_image:
+    name: busybox
+    source: pull
