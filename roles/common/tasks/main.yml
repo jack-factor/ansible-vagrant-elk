@@ -2,8 +2,31 @@
 
 - name: install epel
   yum:
-    name: "{{ item }}"
+    name: [ "epel-release", "https://centos7.iuscommunity.org/ius-release.rpm"]
     state: "installed"
-  with_items:
-    - "epel-release"
-    - "https://centos7.iuscommunity.org/ius-release.rpm"
+
+- name: put selinux into permissive mode
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: if admin group exist
+  group:
+    name: admin
+    state: present
+
+- name: Allow 'admin' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%admin'
+    line: '%admin ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: Add the user 'challenge'
+  user:
+    name: challenge
+    comment: Challenge
+    groups: admin
+    append: yes
+    createhome: yes
