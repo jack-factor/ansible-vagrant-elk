@@ -1,0 +1,9 @@
+---
+
+- hosts: elastic
+  gather_facts: true
+  become: yes
+  become_method: sudo
+  user: vagrant
+  roles:
+    - roles/common
