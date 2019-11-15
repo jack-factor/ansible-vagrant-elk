@@ -1,5 +1,10 @@
 ---
 
+#- name: common role - all
+#  hosts: all
+#  roles:
+#    - roles/common
+
 - hosts: elastic
   gather_facts: true
   # user: vagrant
