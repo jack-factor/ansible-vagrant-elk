@@ -8,3 +8,7 @@
   roles:
     - roles/common
     - roles/docker
+    - roles/java
+    - roles/elasticsearch
+    - roles/docker-kibana
+    - roles/docker-logstash

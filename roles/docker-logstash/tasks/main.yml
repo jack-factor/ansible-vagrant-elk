@@ -1,0 +1,6 @@
+---
+
+- name: pull logstach image
+  docker_image:
+    name: docker.elastic.co/logstash/logstash:7.4.2
+    source: pull

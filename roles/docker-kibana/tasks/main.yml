@@ -1,0 +1,17 @@
+---
+
+- name: Pull kibana image
+  docker_image:
+    name: docker.elastic.co/kibana/kibana:7.4.2
+    source: pull
+
+- name: Start a container kibana
+  docker_container:
+    name: kibana
+    image: docker.elastic.co/kibana/kibana:7.4.2
+    env:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://0.0.0.0:9200
+    ports:
+     - "5601:5601"
+    network_mode: host
