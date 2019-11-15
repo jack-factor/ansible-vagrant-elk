@@ -1,0 +1,3 @@
+---
+- name: install oracle java
+  yum: name=java-11-openjdk-devel state=latest
