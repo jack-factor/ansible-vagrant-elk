@@ -1,6 +1,17 @@
 ---
 
-- name: pull logstach image
+- name: pull logstash image
   docker_image:
     name: docker.elastic.co/logstash/logstash:7.4.2
     source: pull
+
+- name: Start a container logstash
+  docker_container:
+    name: logstash
+    image: docker.elastic.co/logstash/logstash:7.4.2
+    command: bin/logstash -e "input { tcp { port => 5959 codec => json}} output { elasticsearch { hosts => ["192.168.20.10:9200"]} }"
+    # volumes:
+    #  - ~/../files/logstash.yml:/usr/share/logstash/config/logstash.yml
+    ports:
+      - "5959:5959"
+    network_mode: host

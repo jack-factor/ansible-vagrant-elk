@@ -7,8 +7,25 @@
   become_method: sudo
   roles:
     - roles/common
-    - roles/docker
     - roles/java
     - roles/elasticsearch
-    - roles/docker-kibana
+
+- hosts: logstash
+  gather_facts: true
+  # user: vagrant
+  become: yes
+  become_method: sudo
+  roles:
+    - roles/common
+    - roles/docker
     - roles/docker-logstash
+
+- hosts: kibana
+  gather_facts: true
+  # user: vagrant
+  become: yes
+  become_method: sudo
+  roles:
+    - roles/common
+    - roles/docker
+    - roles/docker-kibana

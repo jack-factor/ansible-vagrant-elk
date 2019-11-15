@@ -46,8 +46,3 @@
   pip:
     name: docker
     state: present
-
-- name: Pull default Docker image
-  docker_image:
-    name: busybox
-    source: pull
