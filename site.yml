@@ -12,12 +12,13 @@
   become_method: sudo
   roles:
     - roles/common
+    - roles/nginx
     - roles/java
     - roles/elasticsearch
 
 - hosts: logstash
   gather_facts: true
-  # user: vagrant
+# user: vagrant
   become: yes
   become_method: sudo
   roles:
