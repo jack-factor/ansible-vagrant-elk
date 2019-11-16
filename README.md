@@ -19,3 +19,13 @@ install these requirements
 5. Install [Ansible](http://docs.ansible.com/ansible/intro_installation.html).  
   `sudo pip install ansible`
 5. Install [Git](https://git-scm.com/).  
+
+Getting Started
+---------------
+1. clone this repository:
+  `git clone git@github.com:jack-factor/ansible-vagrant-elk.git`
+2. Start Vagrant VM:
+  `vagrant up`
+4. Open your browser:
+  `http://kibana:5601`
+  `http://elastic:9600`
